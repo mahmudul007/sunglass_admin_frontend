@@ -1,0 +1,27 @@
+
+  .cellWrapper{
+    display: flex;
+    align-items: center;
+  }
+  .image{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+  }
+
+
+.status{
+  border-radius: 10px;
+  padding: 4px;
+  &.Approved{
+    color: green;
+    background-color: greenyellow;
+  }
+  &.Pending{
+    color: black;
+    background-color: rgb(231, 105, 105);
+  }
+  
+}
