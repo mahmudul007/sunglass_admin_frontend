@@ -27,8 +27,8 @@
                 flex: 1;
                 text-align: center;
                 -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-                    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-               
+                box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+
 
                 img {
                     height: 200px;
@@ -45,10 +45,11 @@
                     flex-wrap: wrap;
                     gap: 10px;
                     justify-content: space-around;
-                    
+
 
                     .formInputt {
                         width: 40%;
+
                         input {
                             width: 100%;
                             border: none;
@@ -66,7 +67,7 @@
                     }
 
                     .button {
-                        
+
                         width: 150px;
 
                     }
