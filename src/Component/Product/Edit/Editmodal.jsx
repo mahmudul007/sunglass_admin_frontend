@@ -6,8 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-const Editmodal = ({ handleClickOpen, handleClose, open, edit }) => {
-  const { title } = edit;
+const Editmodal = ({ handleClickOpen, handleClose, open }) => {
   return (
     <div>
       <form>
@@ -27,7 +26,6 @@ const Editmodal = ({ handleClickOpen, handleClose, open, edit }) => {
               type="text"
               fullWidth
               variant="standard"
-              defaultValue={title}
             />
             {/* <TextField
               autoFocus

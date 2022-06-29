@@ -42,7 +42,6 @@ const Productdata = ({ products, setProducts, handleDelete }) => {
     setOpen(true);
   };
   ////editting
-  const [edit, setEdit] = useState();
 
   const handleEdit = (id) => {
     setOpen(true);
@@ -70,7 +69,7 @@ const Productdata = ({ products, setProducts, handleDelete }) => {
                 <StyledTableCell align="left">{row.price}</StyledTableCell>
                 <StyledTableCell align="left">{row.color}</StyledTableCell>
                 <StyledTableCell align="left">
-                  <button onClick={() => handleEdit(row._id)}>Edit</button>{" "}
+                  <button onClick={() => handleEdit()}>Edit</button>{" "}
                   <button align="rightt" onClick={() => handleDelete(row._id)}>
                     Delete
                   </button>
@@ -85,7 +84,6 @@ const Productdata = ({ products, setProducts, handleDelete }) => {
         handleClose={handleClose}
         open={open}
         handleClickOpen={handleClickOpen}
-        edit={edit}
       ></Editmodal>
     </>
   );
