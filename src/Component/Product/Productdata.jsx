@@ -42,8 +42,13 @@ const Productdata = ({ products, setProducts, handleDelete }) => {
     setOpen(true);
   };
   ////editting
+  const [editdata, setEditdata] = useState();
 
   const handleEdit = (id) => {
+    const data = products.find((item) => item._id == id);
+    console.log(data);
+    setEditdata(data);
+
     setOpen(true);
   };
   return (
@@ -69,7 +74,7 @@ const Productdata = ({ products, setProducts, handleDelete }) => {
                 <StyledTableCell align="left">{row.price}</StyledTableCell>
                 <StyledTableCell align="left">{row.color}</StyledTableCell>
                 <StyledTableCell align="left">
-                  <button onClick={() => handleEdit()}>Edit</button>{" "}
+                  <button onClick={() => handleEdit(row._id)}>Edit</button>{" "}
                   <button align="rightt" onClick={() => handleDelete(row._id)}>
                     Delete
                   </button>
