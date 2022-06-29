@@ -3,9 +3,9 @@ import Navbar from "../Navbar/Navbar";
 import Sidebar from "../Sidebar/Sidebar";
 import Button from "@mui/material/Button";
 import "../Form/form.scss";
-import { Datatable } from "../Datatable/Datatable";
+
 import { useForm } from "react-hook-form";
-import { Productlist } from "./Productlist/Productlist";
+import Productlist from "./Productlist/Productlist";
 
 const AddProduct = () => {
   const { register, handleSubmit } = useForm();

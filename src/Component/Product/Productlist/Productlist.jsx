@@ -1,96 +1,55 @@
-import React, { useState, useEffect } from "react";
-import "../../Datatable/datatable.scss";
-import { DataGrid } from "@mui/x-data-grid";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Productdata from "../Productdata";
 
-export const Productlist = ({ loading, product }) => {
-  const [data, setData] = useState([]);
-
-  const handleDelete = (id) => {
-    // setData(data.filter((item) => item.id !== id));
-  };
-  const columns = [
-    { field: "_id", headerName: "ID", width: 100 },
-    {
-      field: "productname",
-      fieldName: "name",
-      width: 220,
-      renderCell: (params) => {
-        return (
-          <div className="cellwithimage">
-            <img
-              className="cellimg"
-              src={`data:image/jpg/png;base64,${params.row.img}`}
-              alt=""
-            />
-            {params.row.title}
-          </div>
-        );
-      },
-    },
-    {
-      field: "color",
-      headerName: "Color",
-      width: 150,
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      width: 150,
-    },
-    {
-      field: "size",
-      headerName: "Size",
-      width: 150,
-    },
-    {
-      field: "categories",
-      headerName: "Categories",
-      width: 150,
-    },
-  ];
+const Productlist = () => {
+  const [products, setProducts] = useState([]);
+  //get product
   useEffect(() => {
     fetch("http://localhost:5000/api/product/")
-      .then((data) => data.json())
+      .then((res) => res.json())
       .then((data) => {
-        setData(data);
+        console.log(data);
+        setProducts(data);
       });
-  });
+  }, []);
 
-  const action = [
-    {
-      field: "action",
-      fieldName: "Action",
-      width: 220,
-      renderCell: (params) => {
-        return (
-          <div className="cellAction">
-            {/* <Link to="/users/test" style={{ textDecoration: "none" }}> */}
-            <div className="viewbutton"> View</div>
-            {/* </Link> */}
+  //delete api
+  const handleDelete = (id) => {
+    const proceed = window.confirm("Are you sure, you want to delete?");
+    var token = null;
+    if (localStorage.getItem("user")) {
+      var obj = JSON.parse(localStorage.getItem("user"));
+      token = obj.access_token;
+    }
+    if (proceed) {
+      const url = `http://localhost:5000/api/product/${id}`;
+      axios
+        .delete(url, {
+          headers: {
+            token: `Bearer ${("token", token)}`,
+          },
+        })
 
-            <div
-              className="deletebutton"
-              onClick={() => handleDelete(params.row.id)}
-            >
-              Delete
-            </div>
-          </div>
-        );
-      },
-    },
-  ];
+        .then((data) => {
+          if (data.status === 200) {
+            alert("sucessfull");
+            const remainingProduct = products.filter((item) => item._id !== id);
+            setProducts(remainingProduct);
+          }
+        });
+    }
+  };
+
   return (
-    <div className="datatable">
-      <h4>Total product {data.length}</h4>
-      <DataGrid
-        getRowId={(row) => row._id}
-        rows={data}
-        columns={columns.concat(action)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
-        checkboxSelection
-        loading={!data.length}
-      />
+    <div>
+      <Productdata
+        handleDelete={handleDelete}
+        products={products}
+        setProducts={setProducts}
+      ></Productdata>
     </div>
   );
 };
+
+export default Productlist;

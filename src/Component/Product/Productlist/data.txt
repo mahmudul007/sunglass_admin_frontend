@@ -1,0 +1,283 @@
+import React, { useState, useEffect } from "react";
+// import "../../Datatable/datatable.scss";
+// import { DataGrid } from "@mui/x-data-grid";
+
+// export const Productlist = ({ loading, product }) => {
+//   const [data, setData] = useState([]);
+
+//   const handleDelete = (id) => {
+//     const proceed = window.confirm("Are you sure, you want to delete?");
+//     var token = null;
+//     if (localStorage.getItem("user")) {
+//       var obj = JSON.parse(localStorage.getItem("user"));
+//       token = obj.access_token;
+//     }
+//     if (proceed) {
+//       const url = `http://localhost:3000/api/product/${id}`;
+//       fetch(url, {
+//         method: "DELETE",
+//         // headers: {
+//         //   token: `Bearer ${("token", token)}`,
+//         // },
+//       }).then();
+//       // .then((res) => res.json())
+//       // .then((data) => {
+//       //   if (data.deletedCount > 0) {
+//       //     alert("deleted successfully");
+//       //     const remainingProduct = data.filter((item) => item._id !== id);
+//       //     setData(remainingProduct);
+//       //   }
+//       // });
+//     }
+
+//     // if (proceed) {
+//     //   const url = `http://localhost:3000/api/product/${_id}`;
+//     //   axios
+//     //     .delete(url, {
+//     //       headers: {
+//     //         token: `Bearer ${("token", token)}`,
+//     //       },
+//     //     })
+//     //     .then((data) => {
+//     //       if (data.deletedCount > 0) {
+//     //         alert("deleted successfully");
+//     //         const remainingProduct = data.filter((item) => item._id !== id);
+//     //         setData(remainingProduct);
+//     //       }
+//     //     });
+//     // }
+
+//     // setData(data.filter((item) => item.id !== id));
+//   };
+//   const columns = [
+//     { field: "_id", headerName: "ID", width: 100 },
+//     {
+//       field: "productname",
+//       fieldName: "name",
+//       width: 220,
+//       renderCell: (params) => {
+//         return (
+//           <div className="cellwithimage">
+//             <img
+//               className="cellimg"
+//               src={`data:image/jpg/png;base64,${params.row.img}`}
+//               alt=""
+//             />
+//             {params.row.title}
+//           </div>
+//         );
+//       },
+//     },
+//     {
+//       field: "color",
+//       headerName: "Color",
+//       width: 150,
+//     },
+//     {
+//       field: "price",
+//       headerName: "Price",
+//       width: 150,
+//     },
+//     {
+//       field: "size",
+//       headerName: "Size",
+//       width: 150,
+//     },
+//     {
+//       field: "categories",
+//       headerName: "Categories",
+//       width: 150,
+//     },
+//   ];
+//   useEffect(() => {
+//     fetch("http://localhost:5000/api/product/")
+//       .then((data) => data.json())
+//       .then((data) => {
+//         setData(data);
+//       });
+//   });
+
+//   const action = [
+//     {
+//       field: "action",
+//       fieldName: "Action",
+//       width: 220,
+//       renderCell: (params) => {
+//         return (
+//           <div className="cellAction">
+//             {/* <Link to="/users/test" style={{ textDecoration: "none" }}> */}
+//             <div className="viewbutton"> Edit</div>
+//             {/* </Link> */}
+
+//             <div
+//               className="deletebutton"
+//               onClick={() => handleDelete(params.row._id)}
+//             >
+//               Delete
+//             </div>
+//           </div>
+//         );
+//       },
+//     },
+//   ];
+//   return (
+//     <div className="datatable">
+//       <h4>Total product {data.length}</h4>
+//       <DataGrid
+//         getRowId={(row) => row._id}
+//         rows={data}
+//         columns={columns.concat(action)}
+//         pageSize={9}
+//         rowsPerPageOptions={[9]}
+//         checkboxSelection
+//         loading={!data.length}
+//       />
+//     </div>
+//   );
+// };
+
+
+
+
+
+
+
+
+
+
+export default function Productlist() {
+ 
+
+  return (
+    
+  );
+}
+----------------------------------------------
+// import * as React from "react";
+// import { styled } from "@mui/material/styles";
+// import Table from "@mui/material/Table";
+// import TableBody from "@mui/material/TableBody";
+// import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+// import TableContainer from "@mui/material/TableContainer";
+// import TableHead from "@mui/material/TableHead";
+// import TableRow from "@mui/material/TableRow";
+// import Paper from "@mui/material/Paper";
+// import axios from "axios";
+// import Editmodal from "../Edit/Editmodal";
+
+// const Productlist = () => {
+//   const [products, setProducts] = React.useState([]);
+
+//   const [open, setOpen] = React.useState(false);
+
+//   const handleClickOpen = () => {
+//     setOpen(true);
+//   };
+
+//   const handleClose = () => {
+//     setOpen(false);
+//   };
+
+//   React.useEffect(() => {
+//     axios
+//       .get("http://localhost:5000/api/product/")
+//       .then((res) => {
+//         // console.log(res.data);
+//         setProducts(res.data);
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   }, []);
+
+//   //delete api
+//   const handleDelete = (id) => {
+//     const proceed = window.confirm("Are you sure, you want to delete?");
+//     var token = null;
+//     if (localStorage.getItem("user")) {
+//       var obj = JSON.parse(localStorage.getItem("user"));
+//       token = obj.access_token;
+//     }
+//     if (proceed) {
+//       const url = `http://localhost:5000/api/product/${id}`;
+//       axios
+//         .delete(url, {
+//           headers: {
+//             token: `Bearer ${("token", token)}`,
+//           },
+//         })
+
+//         .then((data) => {
+//           if (data.status === 200) {
+//             alert("sucessfull");
+//             const remainingProduct = products.filter((item) => item._id !== id);
+//             setProducts(remainingProduct);
+//           }
+//         });
+//     }
+//   };
+//   const handleEdit = () => {};
+
+//   const StyledTableCell = styled(TableCell)(({ theme }) => ({
+//     [`&.${tableCellClasses.head}`]: {
+//       backgroundColor: theme.palette.common.black,
+//       color: theme.palette.common.white,
+//     },
+//     [`&.${tableCellClasses.body}`]: {
+//       fontSize: 14,
+//     },
+//   }));
+
+//   const StyledTableRow = styled(TableRow)(({ theme }) => ({
+//     "&:nth-of-type(odd)": {
+//       backgroundColor: theme.palette.action.hover,
+//     },
+//     // hide last border
+//     "&:last-child td, &:last-child th": {
+//       border: 0,
+//     },
+//   }));
+
+//   return (
+//     <>
+//       <h1>{products.length}</h1>
+//       <TableContainer component={Paper}>
+//         <Table sx={{ minWidth: 700 }} aria-label="customized table">
+//           <TableHead>
+//             <TableRow>
+//               <StyledTableCell align="left">Name</StyledTableCell>
+//               <StyledTableCell align="left">Color</StyledTableCell>
+//               <StyledTableCell align="left">Size</StyledTableCell>
+//               <StyledTableCell align="left">Catergories</StyledTableCell>
+//               <StyledTableCell align="left">Price</StyledTableCell>
+//               <StyledTableCell align="left">Action</StyledTableCell>
+//             </TableRow>
+//           </TableHead>
+//           <TableBody>
+//             {products.map((row) => (
+//               <StyledTableRow key={row._id}>
+//                 <StyledTableCell align="left">{row.title}</StyledTableCell>
+//                 <StyledTableCell align="left">{row.color}</StyledTableCell>
+//                 <StyledTableCell align="left">{row.size}</StyledTableCell>
+//                 <StyledTableCell align="left">{row.categories}</StyledTableCell>
+//                 <StyledTableCell align="left">{row.price}</StyledTableCell>
+//                 <StyledTableCell align="left">
+//                   <button onClick={() => handleClickOpen()}>Edit</button>
+//                   <button align="rightt" onClick={() => handleDelete(row._id)}>
+//                     Delete
+//                   </button>
+//                 </StyledTableCell>
+//               </StyledTableRow>
+//             ))}
+//           </TableBody>
+//         </Table>
+//       </TableContainer>
+//       <Editmodal
+//         openBooking={openBooking}
+//         handleBookingClose={handleBookingClose}
+//       ></Editmodal>
+//     </>
+//   );
+// };
+
+// export default Productlist;

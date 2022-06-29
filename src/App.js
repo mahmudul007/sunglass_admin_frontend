@@ -8,8 +8,9 @@ import Login from "./Component/Login/Login";
 import PrivateRoute from "./Component/Login/PrivateRoute";
 import AddProduct from "./Component/Product/AddProduct";
 import List from "./Component/Transaction/List";
-import { Productlist } from "./Component/Product/Productlist/Productlist";
 import Register from "./Component/Register/Register";
+import Productlist from "./Component/Product/Productlist/Productlist";
+import Productdata from "./Component/Product/Productdata";
 
 function App() {
   var user = null;
@@ -59,8 +60,9 @@ function App() {
           <Form />
         </Route>
         <Route path="/datalog">
-          <Productlist />
+          <Productlist></Productlist>
         </Route>
+        <Route path="/product/updaye/:id"></Route>
 
         <Route path="/add">
           <AddProduct />
