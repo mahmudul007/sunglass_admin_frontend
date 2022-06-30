@@ -31,7 +31,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const Productdata = ({ products, setProducts, handleDelete }) => {
+const Productdata = ({ products, handleDelete }) => {
   //modal
   const [open, setOpen] = React.useState(false);
 
@@ -42,11 +42,11 @@ const Productdata = ({ products, setProducts, handleDelete }) => {
     setOpen(true);
   };
   ////editting
-  const [editdata, setEditdata] = useState();
+  const [editdata, setEditdata] = useState("");
 
   const handleEdit = (id) => {
     const data = products.find((item) => item._id == id);
-    console.log(data);
+
     setEditdata(data);
 
     setOpen(true);
@@ -89,6 +89,7 @@ const Productdata = ({ products, setProducts, handleDelete }) => {
         handleClose={handleClose}
         open={open}
         handleClickOpen={handleClickOpen}
+        editdata={editdata}
       ></Editmodal>
     </>
   );

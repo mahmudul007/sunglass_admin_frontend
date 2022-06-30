@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -6,79 +6,124 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-const Editmodal = ({ handleClickOpen, handleClose, open }) => {
+import axios from "axios";
+import { useForm } from "react-hook-form";
+
+const Editmodal = ({ handleClickOpen, handleClose, open, editdata }) => {
+  const { title, price, size, color, desc, categories, _id, products } =
+    editdata;
+  var token = null;
+  if (localStorage.getItem("user")) {
+    var obj = JSON.parse(localStorage.getItem("user"));
+    token = obj.access_token;
+  }
+
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data, id) => {
+    // send to the server
+    axios
+      .put(`http://localhost:5000/api/product/${_id}`, data, {
+        headers: {
+          token: `Bearer ${("token", token)}`,
+        },
+      })
+      .then((data) => {
+        if (data.status === 200) {
+          alert("sucessfull");
+          window.location.reload();
+          handleClose(true);
+        }
+      })
+
+      .catch(function (error) {
+        console.log(error.message);
+      });
+  };
+
   return (
     <div>
-      <form>
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Edit Product</DialogTitle>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Edit Product</DialogTitle>
+        <DialogContentText>
+          To subscribe to this website, please enter your email address here. We
+          will send updates occasionally.
+        </DialogContentText>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
-            </DialogContentText>
-
             <TextField
               autoFocus
               margin="dense"
-              id="title"
+              name="title"
               label="Name"
               type="text"
               fullWidth
               variant="standard"
+              defaultValue={title}
+              {...register("title")}
             />
-            {/* <TextField
+
+            <TextField
               autoFocus
               margin="dense"
-              id="color"
+              name="color"
               label="Color"
               type="text"
               fullWidth
               variant="standard"
+              defaultValue={color}
+              {...register("color")}
             />
             <TextField
               autoFocus
               margin="dense"
-              id="size"
+              name="size"
               label="Size"
               type="text"
               fullWidth
               variant="standard"
+              defaultValue={size}
+              {...register("size")}
             />
             <TextField
               autoFocus
               margin="dense"
-              id="categories"
+              name="categories"
               label="Categories"
-              type="email"
+              type="text"
               fullWidth
               variant="standard"
+              defaultValue={categories}
+              {...register("categories")}
             />
             <TextField
               autoFocus
               margin="dense"
-              id="price"
+              name="price"
               label="Price"
               type="number"
               fullWidth
               variant="standard"
+              defaultValue={price}
+              {...register("price")}
             />
             <TextField
               autoFocus
               margin="dense"
-              id="desc"
+              name="desc"
               label="Description"
               type="text"
               fullWidth
               variant="standard"
-            /> */}
+              defaultValue={desc}
+              {...register("desc")}
+            />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleClose}>Update</Button>
+            <Button type="submit">Update</Button>
           </DialogActions>
-        </Dialog>
-      </form>
+        </form>
+      </Dialog>
     </div>
   );
 };

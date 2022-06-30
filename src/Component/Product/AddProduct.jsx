@@ -6,8 +6,9 @@ import "../Form/form.scss";
 
 import { useForm } from "react-hook-form";
 import Productlist from "./Productlist/Productlist";
+import Editmodal from "./Edit/Editmodal";
 
-const AddProduct = () => {
+const AddProduct = ({ setProducts }) => {
   const { register, handleSubmit } = useForm();
   const [image, setImage] = useState(null);
 
@@ -37,6 +38,7 @@ const AddProduct = () => {
         token: `Bearer ${("token", token)}`,
       },
     }).then((res) => res.json());
+
     alert(JSON.stringify(` status: ${res.status}`));
     window.location.reload();
   };

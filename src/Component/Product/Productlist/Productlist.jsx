@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Productdata from "../Productdata";
-
+import AddProduct from "../AddProduct";
 const Productlist = () => {
   const [products, setProducts] = useState([]);
   //get product
@@ -9,7 +9,7 @@ const Productlist = () => {
     fetch("http://localhost:5000/api/product/")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setProducts(data);
       });
   }, []);
