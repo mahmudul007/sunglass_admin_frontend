@@ -69,7 +69,6 @@ const Productdata = ({ products, handleDelete }) => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            {/* <Link to="/users/test" style={{ textDecoration: "none" }}> */}
             <div
               className="viewbutton"
               onClick={() => handleEdit(params.row._id)}
@@ -77,7 +76,6 @@ const Productdata = ({ products, handleDelete }) => {
               {" "}
               Edit
             </div>
-            {/* </Link> */}
 
             <div
               className="deletebutton"
