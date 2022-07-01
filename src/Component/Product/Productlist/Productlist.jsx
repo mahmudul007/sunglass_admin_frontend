@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Productdata from "../Productdata";
 import AddProduct from "../AddProduct";
+import Lists from "./Lists";
 const Productlist = () => {
   const [products, setProducts] = useState([]);
   //get product
@@ -48,6 +49,7 @@ const Productlist = () => {
         products={products}
         setProducts={setProducts}
       ></Productdata>
+      <div>{/* <Lists products={products}></Lists> */}</div>
     </div>
   );
 };

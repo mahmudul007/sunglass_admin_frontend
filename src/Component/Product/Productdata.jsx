@@ -1,35 +1,7 @@
 import React, { useState } from "react";
-
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import axios from "axios";
+import "../Datatable/datatable.scss";
+import { DataGrid } from "@mui/x-data-grid";
 import Editmodal from "./Edit/Editmodal";
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
 
 const Productdata = ({ products, handleDelete }) => {
   //modal
@@ -51,39 +23,88 @@ const Productdata = ({ products, handleDelete }) => {
 
     setOpen(true);
   };
+
+  const columns = [
+    { field: "_id", headerName: "ID", width: 100 },
+    {
+      field: "Productname",
+      fieldName: "name",
+      width: 220,
+      renderCell: (params) => {
+        return (
+          <div className="cellwithimage">
+            <img className="cellimg" src={params.row.img} alt="" />
+            {params.row.title}
+          </div>
+        );
+      },
+    },
+    {
+      field: "color",
+      headerName: "Color",
+      width: 150,
+    },
+    {
+      field: "price",
+      headerName: "Price",
+      width: 150,
+    },
+    {
+      field: "size",
+      headerName: "Size",
+      width: 150,
+    },
+    {
+      field: "categories",
+      headerName: "Categories",
+      width: 150,
+    },
+  ];
+
+  const action = [
+    {
+      field: "Action",
+      fieldName: "Action",
+      width: 220,
+      renderCell: (params) => {
+        return (
+          <div className="cellAction">
+            {/* <Link to="/users/test" style={{ textDecoration: "none" }}> */}
+            <div
+              className="viewbutton"
+              onClick={() => handleEdit(params.row._id)}
+            >
+              {" "}
+              Edit
+            </div>
+            {/* </Link> */}
+
+            <div
+              className="deletebutton"
+              onClick={() => handleDelete(params.row._id)}
+            >
+              Delete
+            </div>
+          </div>
+        );
+      },
+    },
+  ];
+
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell align="left">Name</StyledTableCell>
-              <StyledTableCell align="left">Categories</StyledTableCell>
-              <StyledTableCell align="left">Price</StyledTableCell>
-              <StyledTableCell align="left">Color</StyledTableCell>
-              <StyledTableCell align="left">Size</StyledTableCell>
-              <StyledTableCell align="left">Action</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {products.map((row) => (
-              <StyledTableRow key={row._id}>
-                <StyledTableCell align="left">{row.title}</StyledTableCell>
-                <StyledTableCell align="left">{row.size}</StyledTableCell>
-                <StyledTableCell align="left">{row.categories}</StyledTableCell>
-                <StyledTableCell align="left">{row.price}</StyledTableCell>
-                <StyledTableCell align="left">{row.color}</StyledTableCell>
-                <StyledTableCell align="left">
-                  <button onClick={() => handleEdit(row._id)}>Edit</button>{" "}
-                  <button align="rightt" onClick={() => handleDelete(row._id)}>
-                    Delete
-                  </button>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <div className="datatable">
+        <h4>Total product {products.length}</h4>
+        <DataGrid
+          getRowId={(row) => row._id}
+          rows={products}
+          columns={columns.concat(action)}
+          pageSize={9}
+          rowsPerPageOptions={[9]}
+          checkboxSelection
+          loading={!products.length}
+        />
+      </div>
 
       <Editmodal
         handleClose={handleClose}

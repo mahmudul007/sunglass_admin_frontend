@@ -11,6 +11,8 @@ import List from "./Component/Transaction/List";
 import Register from "./Component/Register/Register";
 import Productlist from "./Component/Product/Productlist/Productlist";
 import Productdata from "./Component/Product/Productdata";
+import { Datatable } from "./Component/Datatable/Datatable";
+import Lists from "./Component/Product/Productlist/Lists";
 
 function App() {
   var user = null;
@@ -59,13 +61,12 @@ function App() {
         <Route path="/form">
           <Form />
         </Route>
-        <Route path="/datalog">
-          <Productlist></Productlist>
-        </Route>
-        <Route path="/product/updaye/:id"></Route>
 
         <Route path="/add">
           <AddProduct />
+        </Route>
+        <Route exact path="/testing">
+          <Lists />
         </Route>
 
         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>

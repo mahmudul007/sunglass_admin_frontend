@@ -8,23 +8,21 @@ import { useForm } from "react-hook-form";
 import Productlist from "./Productlist/Productlist";
 import Editmodal from "./Edit/Editmodal";
 
-const AddProduct = ({ setProducts }) => {
+const AddProduct = () => {
   const { register, handleSubmit } = useForm();
   const [image, setImage] = useState(null);
 
   const onSubmit = async (data) => {
-    if (!data.file) {
-      return;
-    }
     var token = null;
     if (localStorage.getItem("user")) {
       var obj = JSON.parse(localStorage.getItem("user"));
       token = obj.access_token;
     }
-    setImage(data.file[0]);
+    // setImage(data.file[0]);
     const formData = new FormData();
-    formData.append("img", data.file[0]);
+    // formData.append("img", data.file[0]);
     formData.append("title", data.title);
+    formData.append("img", data.img);
     formData.append("desc", data.desc);
     formData.append("categories", data.categories);
     formData.append("size", data.size);
@@ -73,12 +71,12 @@ const AddProduct = ({ setProducts }) => {
                 />
               </div>
               <div className="formInputt">
-                <label htmlFor="file"> Product image</label>
+                <label htmlFor=""> Product image</label>
                 <input
                   // onChange={(e) => setImage(e.target.files[0])}
-                  type="file"
-                  {...register("file")}
-                  id="file"
+                  type="txt"
+                  {...register("img")}
+                  id="txt"
                 />
               </div>
 

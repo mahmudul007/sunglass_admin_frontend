@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { columns, userRows } from "../../dummydata";
+import { userRows } from "../../dummydata";
 import { Link } from "react-router-dom";
 
 export const Datatable = () => {
@@ -10,18 +10,54 @@ export const Datatable = () => {
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
+  const columns = [
+    { field: "id", headerName: "Name", width: 100 },
+    {
+      field: "Category",
+      fieldName: "User",
+      width: 220,
+      renderCell: (params) => {
+        return (
+          <div className="cellwithimage">
+            {/* <img className="cellimg" src={params.row.img} alt="" /> */}
+            {params.row.username}
+          </div>
+        );
+      },
+    },
+    {
+      field: "email",
+      headerName: "Price",
+      width: 220,
+    },
+    {
+      field: "age",
+      headerName: "Size",
+      width: 220,
+    },
+    {
+      field: "status",
+      headerName: "Color",
+      width: 220,
+      // renderCell: (params) => {
+      //   return (
+      //     <div className={`cellwithStatus ${params.row.status}`}>
+      //       {params.row.status}
+      //     </div>
+      //   );
+      // },
+    },
+  ];
 
   const action = [
     {
-      field: "action",
-      fieldName: "Action",
+      field: "Action",
+      fieldName: "action",
       width: 220,
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
-              <div className="viewbutton"> View</div>
-            </Link>
+            <div className="viewbutton"> View</div>
 
             <div
               className="deletebutton"
